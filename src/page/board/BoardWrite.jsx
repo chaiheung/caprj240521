@@ -15,10 +15,12 @@ export function BoardWrite() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [writer, setWriter] = useState("");
+  const [loading, setLoading] = useState(false);
   const toast = useToast();
   const navigate = useNavigate();
 
   function handleSaveClick() {
+    setLoading(true);
     axios.post("/api/board/add", {
       title,
       content,
@@ -42,7 +44,7 @@ export function BoardWrite() {
           })
         }
       })
-      .finally();
+      .finally(() => setLoading(false));
   }
 
   let disableSaveButton = false;
@@ -79,7 +81,9 @@ export function BoardWrite() {
           </FormControl>
         </Box>
         <Box>
-          <Button isDisabled={disableSaveButton}
+          <Button
+                  isLoading={loading}
+                  isDisabled={disableSaveButton}
                   colorScheme={"blue"}
                   onClick={handleSaveClick}>
             저장
