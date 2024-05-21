@@ -23,8 +23,8 @@ export function BoardWrite() {
       title,
       content,
       writer,
-    });
-  .then(() => {
+    })
+      .then(() => {
       toast({
         description: "새 글이 등록되었습니다.",
         status: "success",
