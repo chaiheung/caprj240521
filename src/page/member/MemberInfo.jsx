@@ -109,7 +109,10 @@ export function MemberInfo() {
           <ModalBody>
             <FormControl>
               <FormLabel>비밀번호 입력</FormLabel>
-              <Input onChange={(e) => setPassword(e.target.value)} />
+              <Input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </FormControl>
           </ModalBody>
           <ModalFooter>
