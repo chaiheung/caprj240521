@@ -82,6 +82,10 @@ export function MemberEdit() {
     isDisableSaveButton = true;
   }
 
+  if (!isCheckedNickName) {
+    isDisableSaveButton = true;
+  }
+
   function handleCheckNickName() {
     axios
       .get(`/api/member/check?nickName=${member.nickName}`)
@@ -112,7 +116,7 @@ export function MemberEdit() {
         <Box>
           <FormControl>
             <FormLabel>이메일</FormLabel>
-            <Input readOnly value={member.email}></Input>
+            <Input readOnly value={member.email} />
           </FormControl>
         </Box>
         <Box>
@@ -142,9 +146,11 @@ export function MemberEdit() {
           <FormControl>닉네임</FormControl>
           <InputGroup>
             <Input
-              onChange={(e) =>
-                setMember({ ...member, nickName: e.target.value.trim() })
-              }
+              onChange={(e) => {
+                const newNickName = e.target.value.trim();
+                setMember({ ...member, nickName: newNickName });
+                setIsCheckedNickName(newNickName === oldNickName);
+              }}
               value={member.nickName}
             />
             <InputRightElement w={"75px"} mr={1}>
