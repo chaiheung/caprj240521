@@ -1,60 +1,60 @@
-import React, {createContext, useEffect, useState} from "react";
-import {jwtDecode} from "jwt-decode";
+import React, { createContext, useEffect, useState } from "react";
+import { jwtDecode } from "jwt-decode";
 
 export const LoginContext = createContext(null);
 
-export function LoginProvider({children}) {
-    const [email, setEmail] = useState("");
-    const [nickName, setNickName] = useState("");
-    const [expired, setExpired] = useState(0);
+export function LoginProvider({ children }) {
+  const [id, setId] = useState("");
+  const [nickName, setNickName] = useState("");
+  const [expired, setExpired] = useState(0);
 
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (token === null) {
-            return;
-        }
-        login(token);
-    }, []);
-
-    // isLoggedIn
-    function isLoggedIn() {
-        return Date.now() < expired * 1000;
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token === null) {
+      return;
     }
+    login(token);
+  }, []);
 
-    // hasEmail
-    function hasEmail(param) {
-        return email === param;
-    }
+  // isLoggedIn
+  function isLoggedIn() {
+    return Date.now() < expired * 1000;
+  }
 
-    // login
-    function login(token) {
-        localStorage.setItem("token", token);
-        const payload = jwtDecode(token);
-        setExpired(payload.exp);
-        setEmail(payload.sub);
-        setNickName(payload.nickName);
-    }
+  // 권한 있는 지? 확인
+  function hasAccess(param) {
+    return id == param;
+  }
 
-    // logout
-    function logout() {
-        localStorage.removeItem("token");
-        setExpired(0);
-        setEmail("");
-        setNickName("");
-    }
+  // login
+  function login(token) {
+    localStorage.setItem("token", token);
+    const payload = jwtDecode(token);
+    setExpired(payload.exp);
+    setId(payload.sub);
+    setNickName(payload.nickName);
+  }
 
-    return (
-        <LoginContext.Provider
-            value={{
-                email: email,
-                nickName: nickName,
-                login: login,
-                logout: logout,
-                isLoggedIn: isLoggedIn,
-                hasEmail: hasEmail,
-            }}
-        >
-            {children}
-        </LoginContext.Provider>
-    );
+  // logout
+  function logout() {
+    localStorage.removeItem("token");
+    setExpired(0);
+    setId("");
+    setNickName("");
+  }
+
+  return (
+    <LoginContext.Provider
+      value={{
+        id: id,
+        nickName: nickName,
+        login: login,
+        logout: logout,
+        isLoggedIn: isLoggedIn,
+        hasAccess: hasAccess,
+      }}
+    >
+      {children}
+    </LoginContext.Provider>
+  );
 }
