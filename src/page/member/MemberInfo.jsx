@@ -14,14 +14,14 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 export function MemberInfo() {
   const [member, setMember] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [password, setPassword] = useState();
+  const [password, setPassword] = useState("");
   const { id } = useParams();
   const toast = useToast();
   const navigate = useNavigate();
@@ -47,7 +47,12 @@ export function MemberInfo() {
     setIsLoading(true);
 
     axios
-      .delete(`/api/member/${id}`, { data: { id, password } })
+      .delete(`/api/member/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        data: { id, password },
+      })
       .then(() => {
         toast({
           status: "success",
@@ -65,6 +70,8 @@ export function MemberInfo() {
       })
       .finally(() => {
         setIsLoading(false);
+        setPassword("");
+        onClose();
       });
   }
 
@@ -79,19 +86,19 @@ export function MemberInfo() {
         <Box>
           <FormControl>
             <FormLabel>이메일</FormLabel>
-            <Input type={"email"} value={member.email} readonly />
+            <Input isReadOnly value={member.email} />
           </FormControl>
         </Box>
         <Box>
           <FormControl>
-            <FormLabel>닉네임</FormLabel>
-            <Input value={member.nickName} readonly />
+            <FormLabel>별명</FormLabel>
+            <Input isReadOnly value={member.nickName} />
           </FormControl>
         </Box>
         <Box>
           <FormControl>
             <FormLabel>가입일시</FormLabel>
-            <Input type={"datetime-local"} value={member.inserted} readonly />
+            <Input isReadOnly value={member.inserted} type={"datetime-local"} />
           </FormControl>
         </Box>
         <Box>
@@ -113,7 +120,7 @@ export function MemberInfo() {
           <ModalHeader>탈퇴 확인</ModalHeader>
           <ModalBody>
             <FormControl>
-              <FormLabel>비밀번호 입력</FormLabel>
+              <FormLabel>암호</FormLabel>
               <Input
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
