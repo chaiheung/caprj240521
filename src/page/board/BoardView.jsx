@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import {
   Box,
@@ -42,13 +42,13 @@ export function BoardView() {
       });
   }, []);
 
-  if (board === null) {
-    return <Spinner />;
-  }
-
   function handleClickRemove() {
     axios
-      .delete(`/api/board/${id}`)
+      .delete(`/api/board/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then(() => {
         toast({
           status: "success",
@@ -67,6 +67,10 @@ export function BoardView() {
       .finally(() => {
         onClose();
       });
+  }
+
+  if (board === null) {
+    return <Spinner />;
   }
 
   return (
@@ -105,6 +109,7 @@ export function BoardView() {
           삭제
         </Button>
       </Box>
+
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -112,7 +117,7 @@ export function BoardView() {
           <ModalBody>삭제하시겠습니까?</ModalBody>
           <ModalFooter>
             <Button onClick={onClose}>취소</Button>
-            <Button colorScheme={"blue"} onClick={handleClickRemove}>
+            <Button colorScheme={"red"} onClick={handleClickRemove}>
               확인
             </Button>
           </ModalFooter>
