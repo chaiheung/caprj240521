@@ -38,6 +38,15 @@ export function BoardList() {
       setBoardList(res.data.boardList);
       setPageInfo(res.data.pageInfo);
     });
+
+    const typeParam = searchParams.get("type");
+    const keywordParam = searchParams.get("keyword");
+    if (typeParam) {
+      setSearchType(typeParam);
+    }
+    if (keywordParam) {
+      setSearchKeyword(keywordParam);
+    }
   }, [searchParams]);
 
   const pageNumbers = [];
@@ -87,7 +96,10 @@ export function BoardList() {
       <Center>
         <Flex>
           <Box>
-            <Select onChange={(e) => setSearchType(e.target.value)}>
+            <Select
+              value={searchType}
+              onChange={(e) => setSearchType(e.target.value)}
+            >
               <option value="all">전체</option>
               <option value="text">글</option>
               <option value="nickName">작성자</option>
@@ -95,6 +107,7 @@ export function BoardList() {
           </Box>
           <Box>
             <Input
+              value={searchKeyword}
               onChange={(e) => setSearchKeyword(e.target.value)}
               placeholder="검색어"
             />
@@ -107,45 +120,43 @@ export function BoardList() {
         </Flex>
       </Center>
       <Center>
-        <Box>
-          {pageInfo.prevPageNumber && (
-            <>
-              <Button onClick={() => navigate(`/?page=1`)}>
-                <FontAwesomeIcon icon={faAnglesLeft} />
-              </Button>
-              <Button
-                onClick={() => navigate(`/?page=${pageInfo.prevPageNumber}`)}
-              >
-                <FontAwesomeIcon icon={faAngleLeft} />
-              </Button>
-            </>
-          )}
-          {pageNumbers.map((pageNumber) => (
-            <Button
-              onClick={() => navigate(`/?page=${pageNumber}`)}
-              key={pageNumber}
-              colorScheme={
-                pageNumber === pageInfo.currentPageNumber ? "blue" : "gray"
-              }
-            >
-              {pageNumber}
+        {pageInfo.prevPageNumber && (
+          <>
+            <Button onClick={() => navigate(`/?page=1`)}>
+              <FontAwesomeIcon icon={faAnglesLeft} />
             </Button>
-          ))}
-          {pageInfo.nextPageNumber && (
-            <>
-              <Button
-                onClick={() => navigate(`/?page=${pageInfo.nextPageNumber}`)}
-              >
-                <FontAwesomeIcon icon={faAngleRight} />
-              </Button>
-              <Button
-                onClick={() => navigate(`/?page=${pageInfo.lastPageNumber}`)}
-              >
-                <FontAwesomeIcon icon={faAnglesRight} />
-              </Button>
-            </>
-          )}
-        </Box>
+            <Button
+              onClick={() => navigate(`/?page=${pageInfo.prevPageNumber}`)}
+            >
+              <FontAwesomeIcon icon={faAngleLeft} />
+            </Button>
+          </>
+        )}
+        {pageNumbers.map((pageNumber) => (
+          <Button
+            onClick={() => navigate(`/?page=${pageNumber}`)}
+            key={pageNumber}
+            colorScheme={
+              pageNumber === pageInfo.currentPageNumber ? "blue" : "gray"
+            }
+          >
+            {pageNumber}
+          </Button>
+        ))}
+        {pageInfo.nextPageNumber && (
+          <>
+            <Button
+              onClick={() => navigate(`/?page=${pageInfo.nextPageNumber}`)}
+            >
+              <FontAwesomeIcon icon={faAngleRight} />
+            </Button>
+            <Button
+              onClick={() => navigate(`/?page=${pageInfo.lastPageNumber}`)}
+            >
+              <FontAwesomeIcon icon={faAnglesRight} />
+            </Button>
+          </>
+        )}
       </Center>
     </Box>
   );
