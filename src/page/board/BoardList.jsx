@@ -1,19 +1,21 @@
 import { Box, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
-import React, {useEffect, useState} from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faUserPen} from "@fortawesome/free-solid-svg-icons";
+import React, { useEffect, useState } from "react";
+import { faUserPen } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export function BoardList() {
   const [boardList, setBoardList] = useState([]);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     axios
-      .get("/api/board/list")
+      .get(`/api/board/list?${searchParams}`)
       .then((res) => setBoardList(res.data));
   }, []);
+
   return (
     <Box>
       <Box>게시물 목록</Box>
@@ -36,7 +38,8 @@ export function BoardList() {
                 }}
                 cursor={"pointer"}
                 onClick={() => navigate(`/board/${board.id}`)}
-                key={board.id}>
+                key={board.id}
+              >
                 <Td>{board.id}</Td>
                 <Td>{board.title}</Td>
                 <Td>{board.writer}</Td>
