@@ -10,7 +10,7 @@ export function Navbar() {
   const account = useContext(LoginContext);
 
   return (
-    <Flex gap={3}>
+    <Flex fontSize={"2xl"} textAlign={"space-evenly"} mb={5} gap={3}>
       <Box
         onClick={() => navigate("/")}
         cursor={"pointer"}
