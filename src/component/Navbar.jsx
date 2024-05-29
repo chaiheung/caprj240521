@@ -16,6 +16,7 @@ export function Navbar() {
         cursor={"pointer"}
         _hover={{
           bgColor: "gray.200",
+          fontWeight: "bold",
         }}
       >
         HOME
@@ -26,6 +27,7 @@ export function Navbar() {
           cursor={"pointer"}
           _hover={{
             bgColor: "gray.200",
+            fontWeight: "bold",
           }}
         >
           글쓰기
@@ -38,9 +40,11 @@ export function Navbar() {
           cursor={"pointer"}
           _hover={{
             bgColor: "gray.200",
+            fontWeight: "bold",
           }}
         >
-          <FontAwesomeIcon icon={faUser} />
+          <FontAwesomeIcon icon={faUser} beatFade />
+          &nbsp;
           {account.nickName}
         </Box>
       )}
@@ -50,6 +54,7 @@ export function Navbar() {
           cursor={"pointer"}
           _hover={{
             bgColor: "gray.200",
+            fontWeight: "bold",
           }}
         >
           회원목록
@@ -61,6 +66,7 @@ export function Navbar() {
           cursor={"pointer"}
           _hover={{
             bgColor: "gray.200",
+            fontWeight: "bold",
           }}
         >
           회원가입
@@ -72,6 +78,7 @@ export function Navbar() {
           cursor={"pointer"}
           _hover={{
             bgColor: "gray.200",
+            fontWeight: "bold",
           }}
         >
           로그인
@@ -85,7 +92,9 @@ export function Navbar() {
           }}
           cursor={"pointer"}
           _hover={{
+            color: "tomato",
             bgColor: "gray.200",
+            fontWeight: "bold",
           }}
         >
           로그아웃
