@@ -18,6 +18,7 @@ import {
   ModalOverlay,
   Spinner,
   Textarea,
+  Tooltip,
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
@@ -92,6 +93,9 @@ export function BoardView() {
   }
 
   function handleClickLike() {
+    if (!account.isLoggedIn()) {
+      return;
+    }
     setIsLikeProcessing(true);
     axios
       .put(`/api/board/like`, { boardId: board.id })
@@ -110,15 +114,21 @@ export function BoardView() {
         <Heading>{board.id}번 게시물</Heading>
         {isLikeProcessing || (
           <Flex>
-            <Box
-              onClick={handleClickLike}
-              cursor="pointer"
-              fontSize="3xl"
-              pl={3}
+            <Tooltip
+              isDisabled={account.isLoggedIn()}
+              hasArrow
+              label={"로그인 해주세요."}
             >
-              {like.like && <FontAwesomeIcon icon={fullHeart} flip />}
-              {like.like || <FontAwesomeIcon icon={emptyHeart} beatFade />}
-            </Box>
+              <Box
+                onClick={handleClickLike}
+                cursor="pointer"
+                fontSize="3xl"
+                pl={3}
+              >
+                {like.like && <FontAwesomeIcon icon={fullHeart} flip />}
+                {like.like || <FontAwesomeIcon icon={emptyHeart} beatFade />}
+              </Box>
+            </Tooltip>
             <Box pl={3} fontSize={"3xl"}>
               {like.count}
             </Box>
