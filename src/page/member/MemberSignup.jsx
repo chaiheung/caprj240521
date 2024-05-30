@@ -142,7 +142,7 @@ export function MemberSignup() {
       <Box>
         <Box>
           <FormControl>
-            <FormLabel>계정</FormLabel>
+            <FormLabel>이메일</FormLabel>
             <InputGroup>
               <Input
                 type={"email"}
@@ -174,16 +174,16 @@ export function MemberSignup() {
         </Box>
         <Box>
           <FormControl>
-            <FormLabel>비밀번호</FormLabel>
+            <FormLabel>패스워드</FormLabel>
             <Input onChange={(e) => setPassword(e.target.value)} />
           </FormControl>
         </Box>
         <Box>
           <FormControl>
-            <FormLabel>비밀번호 확인</FormLabel>
+            <FormLabel>패스워드 확인</FormLabel>
             <Input onChange={(e) => setPasswordCheck(e.target.value)} />
             {isCheckedPassword || (
-              <FormHelperText>비밀번호가 일치하지 않습니다.</FormHelperText>
+              <FormHelperText>패스워드가 일치하지 않습니다.</FormHelperText>
             )}
           </FormControl>
         </Box>

@@ -95,7 +95,7 @@ export function MemberInfo() {
 
   return (
     <Box>
-      <Box>회원 정보</Box>
+      <Box>회원정보</Box>
       <Box>
         <Box>
           <FormControl>
@@ -105,7 +105,7 @@ export function MemberInfo() {
         </Box>
         <Box>
           <FormControl>
-            <FormLabel>별명</FormLabel>
+            <FormLabel>닉네임</FormLabel>
             <Input isReadOnly value={member.nickName} />
           </FormControl>
         </Box>
@@ -136,7 +136,7 @@ export function MemberInfo() {
           <ModalHeader>탈퇴 확인</ModalHeader>
           <ModalBody>
             <FormControl>
-              <FormLabel>암호</FormLabel>
+              <FormLabel>패스워드</FormLabel>
               <Input
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

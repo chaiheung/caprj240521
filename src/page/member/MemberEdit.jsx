@@ -134,7 +134,7 @@ export function MemberEdit() {
 
   return (
     <Box>
-      <Box>회원 정보 수정</Box>
+      <Box>회원정보 수정</Box>
       <Box>
         <Box>
           <FormControl>
@@ -144,7 +144,7 @@ export function MemberEdit() {
         </Box>
         <Box>
           <FormControl>
-            <FormLabel>암호</FormLabel>
+            <FormLabel>패스워드</FormLabel>
             <Input
               onChange={(e) =>
                 setMember({ ...member, password: e.target.value })
@@ -152,21 +152,21 @@ export function MemberEdit() {
               placeholder={"암호를 변경하려면 입력하세요"}
             />
             <FormHelperText>
-              입력하지 않으면 기존 암호를 변경하지 않습니다.
+              입력하지 않으면 기존 패스워드를 변경하지 않습니다.
             </FormHelperText>
           </FormControl>
         </Box>
         <Box>
           <FormControl>
-            <FormLabel>암호 확인</FormLabel>
+            <FormLabel>패스워드 확인</FormLabel>
             <Input onChange={(e) => setPasswordCheck(e.target.value)} />
             {member.password === passwordCheck || (
-              <FormHelperText>암호가 일치하지 않습니다.</FormHelperText>
+              <FormHelperText>패스워드가 일치하지 않습니다.</FormHelperText>
             )}
           </FormControl>
         </Box>
         <Box>
-          <FormControl>별명</FormControl>
+          <FormControl>닉네임</FormControl>
           <InputGroup>
             <Input
               onChange={(e) => {
@@ -200,10 +200,10 @@ export function MemberEdit() {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>기존 암호 확인</ModalHeader>
+          <ModalHeader>기존 패스워드 확인</ModalHeader>
           <ModalBody>
             <FormControl>
-              <FormLabel>기존 암호</FormLabel>
+              <FormLabel>기존 패스워드</FormLabel>
               <Input onChange={(e) => setOldPassword(e.target.value)} />
             </FormControl>
           </ModalBody>

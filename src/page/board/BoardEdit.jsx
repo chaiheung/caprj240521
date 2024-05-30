@@ -161,7 +161,7 @@ export function BoardEdit() {
               }}
             />
             <FormHelperText>
-              파일 총 용량은 10MB, 하나당 1MB를 초과할 수 없습니다.
+              파일 총 용량은 30MB, 하나당 3MB를 초과할 수 없습니다.
             </FormHelperText>
           </FormControl>
         </Box>

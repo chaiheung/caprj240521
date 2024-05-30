@@ -25,7 +25,7 @@ export function MemberList() {
   }
   return (
     <Box>
-      <Box>회원 목록</Box>
+      <Box>회원목록</Box>
       <Box>
         <Table>
           <Thead>
