@@ -1,12 +1,14 @@
 import {
   Box,
   Button,
+  Center,
   FormControl,
   FormLabel,
+  Heading,
   Input,
   useToast,
 } from "@chakra-ui/react";
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../component/LoginProvider.jsx";
@@ -43,27 +45,31 @@ export function MemberLogin() {
   }
 
   return (
-    <Box>
-      <Box>로그인</Box>
-      <Box>
-        <Box>
-          <FormControl>
-            <FormLabel>이메일</FormLabel>
-            <Input onChange={(e) => setEmail(e.target.value)} />
-          </FormControl>
+    <Center>
+      <Box w={500}>
+        <Box mb={10}>
+          <Heading>로그인</Heading>
         </Box>
         <Box>
-          <FormControl>
-            <FormLabel>패스워드</FormLabel>
-            <Input onChange={(e) => setPassword(e.target.value)} />
-          </FormControl>
-        </Box>
-        <Box>
-          <Button onClick={handleLogin} colorScheme={"blue"}>
-            로그인
-          </Button>
+          <Box mb={7}>
+            <FormControl>
+              <FormLabel>이메일</FormLabel>
+              <Input onChange={(e) => setEmail(e.target.value)} />
+            </FormControl>
+          </Box>
+          <Box mb={7}>
+            <FormControl>
+              <FormLabel>패스워드</FormLabel>
+              <Input onChange={(e) => setPassword(e.target.value)} />
+            </FormControl>
+          </Box>
+          <Box mb={7}>
+            <Button onClick={handleLogin} colorScheme={"blue"}>
+              로그인
+            </Button>
+          </Box>
         </Box>
       </Box>
-    </Box>
+    </Center>
   );
 }
