@@ -18,6 +18,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
 import axios from "axios";
 import { LoginContext } from "../LoginProvider.jsx";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
+import { CommentEdit } from "./CommentEdit.jsx";
 
 export function CommentItem({ comment, isProcessing, setIsProcessing }) {
   const [isEditing, setIsEditing] = useState(false);
