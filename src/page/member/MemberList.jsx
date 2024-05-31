@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import {
   Box,
+  Center,
+  Heading,
   Spinner,
   Table,
   Tbody,
@@ -24,35 +26,39 @@ export function MemberList() {
     return <Spinner />;
   }
   return (
-    <Box>
-      <Box>회원목록</Box>
-      <Box>
-        <Table>
-          <Thead>
-            <Tr>
-              <Th>#</Th>
-              <Th>이메일</Th>
-              <Th>닉네임</Th>
-              <Th>가입일시</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {memberList.map((member) => (
-              <Tr
-                cursor={"pointer"}
-                _hover={{ bgColor: "gray.200" }}
-                onClick={() => navigate(`/member/${member.id}`)}
-                key={member.id}
-              >
-                <Td>{member.id}</Td>
-                <Td>{member.email}</Td>
-                <Td>{member.nickName}</Td>
-                <Td>{member.signupDateAndTime}</Td>
+    <Center>
+      <Box w={500}>
+        <Box mb={10}>
+          <Heading>회원목록</Heading>
+        </Box>
+        <Box mb={10}>
+          <Table>
+            <Thead>
+              <Tr>
+                <Th w={20}>#</Th>
+                <Th>이메일</Th>
+                <Th w={"150px"}>닉네임</Th>
+                <Th w={96}>가입일시</Th>
               </Tr>
-            ))}
-          </Tbody>
-        </Table>
+            </Thead>
+            <Tbody>
+              {memberList.map((member) => (
+                <Tr
+                  cursor={"pointer"}
+                  _hover={{ bgColor: "gray.200" }}
+                  onClick={() => navigate(`/member/${member.id}`)}
+                  key={member.id}
+                >
+                  <Td>{member.id}</Td>
+                  <Td>{member.email}</Td>
+                  <Td>{member.nickName}</Td>
+                  <Td>{member.signupDateAndTime}</Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        </Box>
       </Box>
-    </Box>
+    </Center>
   );
 }
