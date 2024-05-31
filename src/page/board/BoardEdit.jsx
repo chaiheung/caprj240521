@@ -5,10 +5,15 @@ import {
   Badge,
   Box,
   Button,
+  Card,
+  CardBody,
+  CardFooter,
+  Center,
   Flex,
   FormControl,
   FormHelperText,
   FormLabel,
+  Heading,
   Image,
   Input,
   Modal,
@@ -86,10 +91,12 @@ export function BoardEdit() {
       }
     }
     fileNameList.push(
-      <li>
-        {addFile.name}
-        {duplicate && <Badge colorScheme="red">override</Badge>}
-      </li>,
+      <Flex>
+        <Text fontSize={"md"} mr={3}>
+          {addFile.name}
+        </Text>
+        <Box>{duplicate && <Badge colorScheme="red">override</Badge>}</Box>
+      </Flex>,
     );
   }
 
@@ -103,9 +110,11 @@ export function BoardEdit() {
 
   return (
     <Box>
-      <Box>{board.id}번 게시물 수정</Box>
+      <Center mb={10}>
+        <Heading>게시물 수정</Heading>
+      </Center>
       <Box>
-        <Box>
+        <Box mb={7}>
           <FormControl>
             <FormLabel>제목</FormLabel>
             <Input
@@ -114,7 +123,7 @@ export function BoardEdit() {
             />
           </FormControl>
         </Box>
-        <Box>
+        <Box mb={7}>
           <FormControl>
             <FormLabel>본문</FormLabel>
             <Textarea
@@ -123,20 +132,29 @@ export function BoardEdit() {
             ></Textarea>
           </FormControl>
         </Box>
-        <Box>
+        <Box mb={7}>
           {board.fileList &&
             board.fileList.map((file) => (
-              <Box border={"2px solid black"} m={3} key={file.name}>
-                <Flex>
-                  <FontAwesomeIcon icon={faTrashCan} />
-                  <Switch
-                    onChange={(e) =>
-                      handleRemoveSwitchChange(file.name, e.target.checked)
-                    }
-                  />
-                  <Text>{file.name}</Text>
-                </Flex>
-                <Box>
+              <Card m={3} key={file.name}>
+                <CardFooter>
+                  <Flex gap={3}>
+                    <Box>
+                      <FontAwesomeIcon color="red" icon={faTrashCan} />
+                    </Box>
+                    <Box>
+                      <Switch
+                        colorScheme={"red"}
+                        onChange={(e) =>
+                          handleRemoveSwitchChange(file.name, e.target.checked)
+                        }
+                      />
+                    </Box>
+                    <Box>
+                      <Text>{file.name}</Text>
+                    </Box>
+                  </Flex>
+                </CardFooter>
+                <CardBody>
                   <Image
                     sx={
                       removeFileList.includes(file.name)
@@ -145,11 +163,11 @@ export function BoardEdit() {
                     }
                     src={file.src}
                   />
-                </Box>
-              </Box>
+                </CardBody>
+              </Card>
             ))}
         </Box>
-        <Box>
+        <Box mb={7}>
           <FormControl>
             <FormLabel>파일</FormLabel>
             <Input
@@ -165,16 +183,27 @@ export function BoardEdit() {
             </FormHelperText>
           </FormControl>
         </Box>
-        <Box>
-          <ul>{fileNameList}</ul>
-        </Box>
-        <Box>
+        {fileNameList.length > 0 && (
+          <Box mb={7}>
+            <Card>
+              <CardHeader>
+                <Heading size="md">선택된 파일 목록</Heading>
+              </CardHeader>
+              <CardBody>
+                <Stack divider={<StackDivider />} spacing={4}>
+                  {fileNameList}
+                </Stack>
+              </CardBody>
+            </Card>
+          </Box>
+        )}
+        <Box mb={7}>
           <FormControl>
             <FormLabel>작성자</FormLabel>
             <Input defaultValue={board.writer} readOnly />
           </FormControl>
         </Box>
-        <Box>
+        <Box mb={7}>
           <Button colorScheme={"blue"} onClick={onOpen}>
             저장
           </Button>
@@ -186,7 +215,9 @@ export function BoardEdit() {
           <ModalHeader></ModalHeader>
           <ModalBody>저장하시겠습니까?</ModalBody>
           <ModalFooter>
-            <Button onClick={onClose}>취소</Button>
+            <Button mr={2} onClick={onClose}>
+              취소
+            </Button>
             <Button onClick={handleClickSave} colorScheme={"blue"}>
               확인
             </Button>

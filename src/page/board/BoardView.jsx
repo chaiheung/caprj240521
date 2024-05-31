@@ -6,6 +6,7 @@ import {
   Button,
   Card,
   CardBody,
+  Center,
   Flex,
   FormControl,
   FormLabel,
@@ -114,8 +115,9 @@ export function BoardView() {
   return (
     <Box>
       <Box mb={10}>
-        <Flex>
+        <Center>
           <Heading>{board.title}</Heading>
+          &nbsp;
           {isLikeProcessing || (
             <Flex>
               <Tooltip
@@ -145,7 +147,7 @@ export function BoardView() {
               <Spinner />
             </Box>
           )}
-        </Flex>
+        </Center>
       </Box>
 
       {/*<Box mb={7}>*/}
