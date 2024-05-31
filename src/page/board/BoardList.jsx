@@ -84,9 +84,9 @@ export function BoardList() {
               <Tr>
                 <Th w={20}>#</Th>
                 <Th>TITLE</Th>
-                <Th w={20}>
-                  <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
-                </Th>
+                {/*<Th w={20}>*/}
+                {/*  <FontAwesomeIcon icon={faHeart} />*/}
+                {/*</Th>*/}
                 <Th w={40}>
                   <FontAwesomeIcon icon={faUserPen} />
                 </Th>
@@ -105,7 +105,6 @@ export function BoardList() {
                   <Td>{board.id}</Td>
                   <Td>
                     {board.title}
-                    &nbsp;
                     {board.numberOfImages > 0 && (
                       <Badge ml={2}>
                         <Flex gap={1}>
@@ -126,8 +125,18 @@ export function BoardList() {
                         </Flex>
                       </Badge>
                     )}
+                    {board.numberOfLike > 0 && (
+                      <Badge ml={2}>
+                        <Flex gap={1}>
+                          <Box>
+                            <FontAwesomeIcon icon={faHeart} beat />
+                          </Box>
+                          <Box>{board.numberOfLike}</Box>
+                        </Flex>
+                      </Badge>
+                    )}
                   </Td>
-                  <Td>{board.numberOfLike > 0 && board.numberOfLike}</Td>
+                  {/*<Td>{board.numberOfLike > 0 && board.numberOfLike}</Td>*/}
                   <Td>{board.writer}</Td>
                 </Tr>
               ))}
