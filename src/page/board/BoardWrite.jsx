@@ -75,7 +75,7 @@ export function BoardWrite() {
   return (
     <Box>
       <Center mb={10}>
-        <Heading>글 작성 화면</Heading>
+        <Heading>새 게시물 작성</Heading>
       </Center>
       <Box>
         <Box mb={7}>
